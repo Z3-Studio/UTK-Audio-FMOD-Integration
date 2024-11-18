@@ -8,7 +8,7 @@ namespace Z3.Audio.FMODIntegration
     /// SoundReference Scriptable Object. You can give position through Transform, Vector2 or nothing at all.
     /// Store a SoundInstance through PlaySound to have more control of it, if needed.
     /// </summary>
-    [CreateAssetMenu(menuName = Z3Path.ScriptableObjects + "Sound Data", fileName = "NewSoundData")]
+    [CreateAssetMenu(menuName = Z3Path.ScriptableObjects + "Sound Data (FMOD)", fileName = "NewSoundData")]
     public class SoundData : ScriptableObject 
     {
         [SerializeField] private EventReference eventReference;

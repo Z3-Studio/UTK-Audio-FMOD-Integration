@@ -26,7 +26,7 @@ namespace Z3.Audio.FMODIntegration
     /// <summary>
     /// Manage the sound requests and returns a SoundInstance.
     /// </summary>
-    public class AudioManager : Monostate<AudioManager>
+    public class AudioManager : Singleton<AudioManager>
     {
         [Header("UI")]
         [SerializeField] private SoundReference submit;
