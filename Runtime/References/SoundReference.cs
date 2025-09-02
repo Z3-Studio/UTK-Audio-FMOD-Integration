@@ -13,7 +13,7 @@ namespace Z3.Audio.FMODIntegration
         [SerializeField] private EventReference eventReference;
 
 #if UNITY_EDITOR
-        public string Path => eventReference.Path;
+        public string Path => !eventReference.IsNull ? eventReference.Path : "NULL";
 #else
         public string Path => string.Empty;
 #endif
@@ -57,6 +57,6 @@ namespace Z3.Audio.FMODIntegration
         public static bool operator !=(SoundReference a, SoundInstance b) => !(b == a);
         #endregion
 
-        public override string ToString() => eventReference.Path;
+        public override string ToString() => Path;
     }
 }

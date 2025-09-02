@@ -13,7 +13,7 @@ namespace Z3.Audio.FMODIntegration
     {
         [SerializeField] private EventReference eventReference;
 
-        public SoundInstance PlaySound(Transform transform = null)
+        public SoundInstance PlaySound(Transform transform)
         {
             return AudioManager.PlaySound(eventReference, transform);
         }
@@ -21,6 +21,11 @@ namespace Z3.Audio.FMODIntegration
         public SoundInstance PlaySound(Vector3 position)
         {
             return AudioManager.PlaySound(eventReference, position);
+        }
+
+        public SoundInstance PlaySound()
+        {
+            return AudioManager.PlaySound(eventReference, null);
         }
     }
 }
