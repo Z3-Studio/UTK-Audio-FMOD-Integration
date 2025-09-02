@@ -56,5 +56,7 @@ namespace Z3.Audio.FMODIntegration
         public static bool operator ==(SoundReference a, SoundInstance b) => b == a;
         public static bool operator !=(SoundReference a, SoundInstance b) => !(b == a);
         #endregion
+
+        public override string ToString() => eventReference.Path;
     }
 }
