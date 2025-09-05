@@ -15,7 +15,7 @@ namespace Z3.Audio.FMODIntegration
 #if UNITY_EDITOR
         public string Path => !eventReference.IsNull ? eventReference.Path : "NULL";
 #else
-        public string Path => string.Empty;
+        public string Path => eventReference.ToString();
 #endif
         public bool IsNull => eventReference.IsNull;
 

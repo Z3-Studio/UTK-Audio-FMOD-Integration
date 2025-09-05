@@ -4,13 +4,13 @@ namespace Z3.Audio.FMODIntegration
 {
     public class SoundPlayer : MonoBehaviour
     {
-        [SerializeField] private SoundReference soundReference;
+        [SerializeField] private SoundData soundData;
 
         private SoundInstance instance;
 
         private void OnEnable()
         {
-            instance = soundReference.PlaySound(transform);
+            instance = soundData.PlaySound(transform);
             AudioManager.AddToPauseSoundsList(instance);
         }
 
