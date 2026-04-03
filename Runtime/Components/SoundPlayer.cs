@@ -2,9 +2,17 @@
 
 namespace Z3.Audio.FMODIntegration
 {
+    public enum DisableAction
+    {
+        None,
+        StopImmediate,
+        StopWithFade
+    }
+
     public class SoundPlayer : MonoBehaviour
     {
         [SerializeField] private SoundData soundData;
+        [SerializeField] private DisableAction disableAction = DisableAction.StopWithFade;
 
         private SoundInstance instance;
 
@@ -16,7 +24,22 @@ namespace Z3.Audio.FMODIntegration
 
         private void OnDisable()
         {
-            instance.StopWithFade();
+            switch (disableAction)
+            {
+                case DisableAction.None:
+                    break;
+
+                case DisableAction.StopImmediate:
+                    instance.StopImmediate();
+                    break;
+
+                case DisableAction.StopWithFade:
+                    instance.StopWithFade();
+                    break;
+
+                default:
+                    throw new System.NotImplementedException();
+            }
         }
     }
 }
