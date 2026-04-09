@@ -29,9 +29,9 @@ namespace Z3.Audio.FMODIntegration
     public class AudioManager : Singleton<AudioManager>
     {
         [Header("UI")]
-        [SerializeField] private SoundReference submit;
-        [SerializeField] private SoundReference cancel;
-        [SerializeField] private SoundReference select;
+        [SerializeField] private SoundData submit;
+        [SerializeField] private SoundData cancel;
+        [SerializeField] private SoundData select;
 
         private static SoundInstance currentMusic;
 
@@ -39,7 +39,7 @@ namespace Z3.Audio.FMODIntegration
         private static readonly List<SoundInstance> stopSoundsList = new List<SoundInstance>();
 
         #region Public Methodsx
-        public static void RemoveMusic(SoundReference music)
+        public static void RemoveMusic(SoundData music)
         {
             if (currentMusic != music)
                 return;
@@ -47,7 +47,7 @@ namespace Z3.Audio.FMODIntegration
             currentMusic.StopWithFade();
         }
 
-        public static void SetCurrentMusic(SoundReference music)
+        public static void SetCurrentMusic(SoundData music)
         {
             if (currentMusic == music)
                 return;
@@ -64,7 +64,7 @@ namespace Z3.Audio.FMODIntegration
 
         public static void PlayUISound(UISound soundType)
         {
-            SoundReference sound = soundType switch
+            SoundData sound = soundType switch
             {
                 UISound.Submit => Instance.submit,
                 UISound.Cancel => Instance.cancel,

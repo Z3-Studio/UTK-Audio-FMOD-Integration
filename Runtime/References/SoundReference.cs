@@ -1,4 +1,5 @@
 ﻿using FMODUnity;
+using System;
 using UnityEngine;
 
 namespace Z3.Audio.FMODIntegration
@@ -7,7 +8,7 @@ namespace Z3.Audio.FMODIntegration
     /// Pure sound class. Works just lite the SoundData, but it is not a ScriptableObject.
     /// Store a SoundInstance through PlaySound to have more control of it, if needed.
     /// </summary>
-    [System.Serializable] // There is a drawer called SoundReferenceDrawer.cs
+    [System.Serializable, Obsolete] // There is a drawer called SoundReferenceDrawer.cs
     public class SoundReference
     {
         [SerializeField] private EventReference eventReference;
@@ -23,11 +24,13 @@ namespace Z3.Audio.FMODIntegration
 
         public SoundInstance PlaySound(Transform transform = null)
         {
+            Debug.LogError("SoundReference is obsolete, use SoundData instead");
             return AudioManager.PlaySound(eventReference, transform);
         }
 
         public SoundInstance PlaySound(Vector3 position)
         {
+            Debug.LogError("SoundReference is obsolete, use SoundData instead");
             return AudioManager.PlaySound(eventReference, position);
         }
 

@@ -4,16 +4,16 @@ namespace Z3.Audio.FMODIntegration
 {
     public class MusicPlayer : MonoBehaviour
     {
-        [SerializeField] private SoundReference soundReference;
+        [SerializeField] private SoundData soundData;
 
         private void Awake()
         {
-            AudioManager.SetCurrentMusic(soundReference);
+            AudioManager.SetCurrentMusic(soundData);
         }
 
         private void OnDisable()
         {
-            AudioManager.RemoveMusic(soundReference);
+            AudioManager.RemoveMusic(soundData);
         }
     }
 }
