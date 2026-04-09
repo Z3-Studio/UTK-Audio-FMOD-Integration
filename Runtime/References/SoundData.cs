@@ -11,7 +11,14 @@ namespace Z3.Audio.FMODIntegration
     [CreateAssetMenu(menuName = Z3Path.ScriptableObjects + "Sound Data (FMOD)", fileName = "NewSoundData")]
     public class SoundData : ScriptableObject 
     {
-        [SerializeField] private EventReference eventReference;
+        [SerializeField] internal EventReference EventReference { get; private set; }
+        [SerializeField, System.Obsolete] internal EventReference eventReference;
+
+#if UNITY_EDITOR
+        public string Path => !eventReference.IsNull ? eventReference.Path : "NULL";
+#else
+        public string Path => eventReference.ToString();
+#endif
 
         public SoundInstance PlaySound(Transform transform)
         {
@@ -27,5 +34,11 @@ namespace Z3.Audio.FMODIntegration
         {
             return AudioManager.PlaySound(eventReference, null);
         }
+
+        public bool IsNull() => eventReference.IsNull;
+
+        public bool IsSameSound(SoundData other) => eventReference.Guid == other.eventReference.Guid;
+
+        public override string ToString() => Path;
     }
 }
