@@ -14,8 +14,10 @@ namespace Z3.Audio.FMODIntegration
         [field: SerializeField] internal EventReference EventReference { get; private set; }
         [SerializeField, System.Obsolete] internal EventReference eventReference;
 
+        internal FMOD.GUID Guid => eventReference.Guid;
+
 #if UNITY_EDITOR
-        public string Path => !eventReference.IsNull ? eventReference.Path : "NULL";
+        public string Path => !eventReference.IsNull ? eventReference.Path : "NULL EVENT REFERENCE";
 #else
         public string Path => eventReference.ToString();
 #endif
@@ -35,9 +37,21 @@ namespace Z3.Audio.FMODIntegration
             return AudioManager.PlaySound(eventReference, null);
         }
 
+        public static bool operator ==(SoundInstance instance, SoundData reference)
+        {
+            if (instance && reference)
+                return instance.Guid == reference.Guid;
+
+            return !instance && !reference; // Both is null
+        }
+
+        public static bool operator !=(SoundInstance a, SoundData b) => !(a == b);
+        public static bool operator ==(SoundData a, SoundInstance b) => b == a;
+        public static bool operator !=(SoundData a, SoundInstance b) => !(b == a);
+
         public bool IsNull() => eventReference.IsNull;
 
-        public bool IsSameSound(SoundData other) => eventReference.Guid == other.eventReference.Guid;
+        public bool IsSameSound(SoundData other) => Guid == other.Guid;
 
         public override string ToString() => Path;
     }
