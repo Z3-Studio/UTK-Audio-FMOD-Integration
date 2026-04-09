@@ -11,7 +11,7 @@ namespace Z3.Audio.FMODIntegration
     [CreateAssetMenu(menuName = Z3Path.ScriptableObjects + "Sound Data (FMOD)", fileName = "NewSoundData")]
     public class SoundData : ScriptableObject 
     {
-        [SerializeField] internal EventReference EventReference { get; private set; }
+        [field: SerializeField] internal EventReference EventReference { get; private set; }
         [SerializeField, System.Obsolete] internal EventReference eventReference;
 
 #if UNITY_EDITOR
