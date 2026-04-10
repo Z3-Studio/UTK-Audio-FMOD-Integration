@@ -29,6 +29,7 @@ namespace Z3.Audio.FMODIntegration
     public class AudioManager : Singleton<AudioManager>
     {
         [Header("UI")]
+        [SerializeField] private string untagged = "Untagged";
         [SerializeField] private SoundData submit;
         [SerializeField] private SoundData cancel;
         [SerializeField] private SoundData select;
@@ -109,16 +110,31 @@ namespace Z3.Audio.FMODIntegration
             soundInstance.Start();
 
             // Add to list
-            foreach (string tag in tags)
+            if (tags.Count > 0)
             {
-                if (!tagLists.TryGetValue(tag, out List<SoundInstance> instances))
+                foreach (string tag in tags)
+                {
+                    if (!tagLists.TryGetValue(tag, out List<SoundInstance> instances))
+                    {
+                        instances = new List<SoundInstance>();
+                        tagLists[tag] = instances;
+                    }
+
+                    instances.Add(soundInstance);
+                }
+            }
+            else
+            {
+                string untagged = Instance.untagged;
+                if (!tagLists.TryGetValue(untagged, out List<SoundInstance> instances))
                 {
                     instances = new List<SoundInstance>();
-                    tagLists[tag] = instances;
+                    tagLists[untagged] = instances;
                 }
 
                 instances.Add(soundInstance);
             }
+
 
             return soundInstance;
         }
