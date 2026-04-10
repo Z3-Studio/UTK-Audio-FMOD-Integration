@@ -9,8 +9,7 @@ namespace Z3.Audio.FMODIntegration
     {
         public void OnPlaySound(SoundData soundData)
         {
-            SoundInstance instance = soundData.PlaySound(transform);
-            AudioManager.AddToPauseSoundsList(instance);
+            soundData.PlaySound(transform);
         }
     }
 }

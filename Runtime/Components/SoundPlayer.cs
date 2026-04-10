@@ -6,7 +6,8 @@ namespace Z3.Audio.FMODIntegration
     {
         None,
         StopImmediate,
-        StopWithFade
+        StopWithFade,
+        Pause,
     }
 
     public class SoundPlayer : MonoBehaviour
@@ -18,8 +19,14 @@ namespace Z3.Audio.FMODIntegration
 
         private void OnEnable()
         {
-            instance = soundData.PlaySound(transform);
-            AudioManager.AddToPauseSoundsList(instance);
+            if (disableAction == DisableAction.Pause)
+            {
+                instance?.Unpause();
+            }
+            else
+            {
+                instance = soundData.PlaySound(transform);
+            }
         }
 
         private void OnDisable()
@@ -27,14 +34,21 @@ namespace Z3.Audio.FMODIntegration
             switch (disableAction)
             {
                 case DisableAction.None:
+                    instance = null;
                     break;
 
                 case DisableAction.StopImmediate:
                     instance.StopImmediate();
+                    instance = null;
                     break;
 
                 case DisableAction.StopWithFade:
                     instance.StopWithFade();
+                    instance = null;
+                    break;
+
+                case DisableAction.Pause:
+                    instance.Pause();
                     break;
 
                 default:

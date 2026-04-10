@@ -1,4 +1,5 @@
 ﻿using FMODUnity;
+using System.Collections.Generic;
 using UnityEngine;
 using Z3.Utils;
 
@@ -11,6 +12,7 @@ namespace Z3.Audio.FMODIntegration
     [CreateAssetMenu(menuName = Z3Path.ScriptableObjects + "Sound Data (FMOD)", fileName = "NewSoundData")]
     public class SoundData : ScriptableObject 
     {
+        [field: SerializeField] internal List<string> Tags { get; private set; }
         [field: SerializeField] internal EventReference EventReference { get; private set; }
 
         internal FMOD.GUID Guid => EventReference.Guid;
@@ -23,17 +25,17 @@ namespace Z3.Audio.FMODIntegration
 
         public SoundInstance PlaySound(Transform transform)
         {
-            return AudioManager.PlaySound(EventReference, transform);
+            return AudioManager.PlaySound(EventReference, transform, Tags);
         }
 
         public SoundInstance PlaySound(Vector3 position)
         {
-            return AudioManager.PlaySound(EventReference, position);
+            return AudioManager.PlaySound(EventReference, position, Tags);
         }
 
         public SoundInstance PlaySound()
         {
-            return AudioManager.PlaySound(EventReference, null);
+            return AudioManager.PlaySound(EventReference, null, Tags);
         }
 
         public static bool operator ==(SoundInstance instance, SoundData reference)
