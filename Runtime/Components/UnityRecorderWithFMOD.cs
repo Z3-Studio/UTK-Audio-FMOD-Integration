@@ -119,7 +119,7 @@ namespace Z3.Audio.FMODIntegration
             var functions = dsp_state.functions;
             functions.getuserdata(ref dsp_state, out var userData);
             var objHandle = GCHandle.FromIntPtr(userData);
-            var obj = objHandle.Target as ScriptUsageUnityRecorder;
+            var obj = objHandle.Target as UnityRecorderWithFMOD;
             int lengthElements = (int)length * inchannels;
             float[] buffer;
 
