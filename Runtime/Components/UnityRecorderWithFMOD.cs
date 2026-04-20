@@ -34,7 +34,7 @@ namespace Z3.Audio.FMODIntegration
 {
     // Source: https://www.fmod.com/docs/2.03/unity/examples-unity-recorder.html
     [RequireComponent(typeof(AudioListener))]
-    public class ScriptUsageUnityRecorder : MonoBehaviour
+    public class UnityRecorderWithFMOD : MonoBehaviour
     {
 
         private FMOD.DSP_READ_CALLBACK mReadCallback;
